@@ -11,7 +11,7 @@ export const productsData = [
     tagline: "Heavy forged solid brass pull handle for monumental main entrance doors",
     description: "Forged from virgin extruded brass in Jamnagar, this heavy solid brass pull handle features precision chamfered contours, hand-buffed mirror finish, and anti-tarnish protective coating.",
     material: "Virgin Solid Brass (IS 319 Grade I)",
-    finishes: ["Antique Brass", "Matt Gold", "Satin Rose Gold", "PVD Matte Black", "Mirror Chrome"],
+    finishes: ["Antique Brass", "Matt Gold", "Rose Gold", "PVD Matte Black"],
     sizes: ["12 Inch (300mm)", "18 Inch (450mm)", "24 Inch (600mm)"],
     applications: ["Main Entrance Doors", "Villa Pivot Doors", "Luxury Corporate Entrances"],
     features: ["Solid brass back-to-back mounting", "Triple layer electroplating", "Corrosion proof for 10+ years"],
