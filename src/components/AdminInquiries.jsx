@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { X, Download, Trash2, RefreshCw, Lock, Search, Phone, Mail, Calendar, AlertTriangle } from 'lucide-react';
 import CustomSelect from './CustomSelect';
+import { getStoredInquiries, deleteStoredInquiry } from '../utils/inquiryService';
 
 export default function AdminInquiries({ onClose, onTriggerServerError }) {
   const [inquiries, setInquiries] = useState([]);
@@ -10,27 +11,26 @@ export default function AdminInquiries({ onClose, onTriggerServerError }) {
 
   const fetchInquiries = async () => {
     setLoading(true);
+    const localItems = getStoredInquiries();
+    let combined = [...localItems];
+
     try {
       const res = await fetch('/api/inquiries');
-      if (res.status >= 500) {
-        if (onTriggerServerError) {
-          onClose();
-          onTriggerServerError({
-            code: `${res.status}`,
-            title: 'Database & Inquiries API Failure',
-            message: 'Inquiries load karte waqt server error aya (500).',
-            details: { endpoint: '/api/inquiries', status: res.status }
-          });
-          return;
+      if (res.ok) {
+        const data = await res.json();
+        if (data.success && Array.isArray(data.inquiries)) {
+          const map = new Map();
+          // Add local ones first
+          localItems.forEach(item => map.set(item.id || item.phone + item.createdAt, item));
+          // Add server ones
+          data.inquiries.forEach(item => map.set(item.id || item.phone + item.createdAt, item));
+          combined = Array.from(map.values()).sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
         }
       }
-      const data = await res.json();
-      if (data.success) {
-        setInquiries(data.inquiries || []);
-      }
     } catch (err) {
-      console.error('Failed to fetch inquiries:', err);
+      console.warn('Backend offline, displaying browser stored inquiries:', err);
     } finally {
+      setInquiries(combined);
       setLoading(false);
     }
   };
@@ -55,19 +55,43 @@ export default function AdminInquiries({ onClose, onTriggerServerError }) {
 
   const handleDelete = async (id) => {
     if (!window.confirm('Delete this inquiry record?')) return;
+    deleteStoredInquiry(id);
+    setInquiries(prev => prev.filter(item => item.id !== id));
     try {
-      const res = await fetch(`/api/inquiries/${id}`, { method: 'DELETE' });
-      const data = await res.json();
-      if (data.success) {
-        setInquiries(inquiries.filter((item) => item.id !== id));
-      }
+      await fetch(`/api/inquiries/${id}`, { method: 'DELETE' });
     } catch (err) {
-      alert('Error deleting inquiry.');
+      // ignore
     }
   };
 
   const handleExportCSV = () => {
-    window.open('/api/export-inquiries', '_blank');
+    if (!inquiries || inquiries.length === 0) {
+      alert('No inquiries to export.');
+      return;
+    }
+
+    const headers = ['ID', 'Date', 'Name', 'Phone', 'Email', 'City', 'Brand', 'Product', 'Inquiry Type', 'Message'];
+    const rows = inquiries.map(inq => [
+      `"${inq.id || ''}"`,
+      `"${inq.createdAt ? new Date(inq.createdAt).toLocaleString('en-IN') : ''}"`,
+      `"${(inq.name || '').replace(/"/g, '""')}"`,
+      `"${(inq.phone || '').replace(/"/g, '""')}"`,
+      `"${(inq.email || '').replace(/"/g, '""')}"`,
+      `"${(inq.city || '').replace(/"/g, '""')}"`,
+      `"${(inq.brand || '').replace(/"/g, '""')}"`,
+      `"${(inq.product || '').replace(/"/g, '""')}"`,
+      `"${(inq.inquiryType || '').replace(/"/g, '""')}"`,
+      `"${(inq.message || '').replace(/"/g, '""')}"`
+    ]);
+
+    const csvContent = 'data:text/csv;charset=utf-8,\uFEFF' + [headers.join(','), ...rows.map(r => r.join(','))].join('\n');
+    const encodedUri = encodeURI(csvContent);
+    const link = document.createElement('a');
+    link.setAttribute('href', encodedUri);
+    link.setAttribute('download', `Aquahevan_Inquiries_${Date.now()}.csv`);
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
   };
 
   const handleTestErrorPage = async () => {

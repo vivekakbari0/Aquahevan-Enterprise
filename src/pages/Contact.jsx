@@ -10,6 +10,7 @@ import {
 } from 'lucide-react';
 import { companyInfo } from '../data/companyData';
 import CustomSelect from '../components/CustomSelect';
+import { submitInquiry } from '../utils/inquiryService';
 
 export default function Contact({ onTriggerServerError }) {
   const [formData, setFormData] = useState({
@@ -42,32 +43,11 @@ export default function Contact({ onTriggerServerError }) {
     setError('');
 
     try {
-      const response = await fetch('/api/inquiries', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          ...formData,
-          message: formData.city ? `[City: ${formData.city}] ${formData.message}` : formData.message
-        })
-      });
-
-      if (response.status >= 500) {
-        if (onTriggerServerError) {
-          onTriggerServerError({
-            code: `${response.status}`,
-            title: 'Factory Server Offline / 500 Error',
-            message: 'Inquiry submit karte samay server par 500 Internal Error aya.',
-            details: { endpoint: '/api/inquiries', status: response.status, statusText: response.statusText }
-          });
-          return;
-        }
-      }
-
-      const data = await response.json();
-      if (data.success) {
+      const res = await submitInquiry(formData);
+      if (res.success) {
         setSubmitted(true);
       } else {
-        setError(data.error || 'Submission failed. Please try again.');
+        setError('Submission failed. Please try again.');
       }
     } catch (err) {
       console.warn('Network issue encountered during submission:', err);

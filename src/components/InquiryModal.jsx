@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { X, Send, CheckCircle2, MessageSquare } from 'lucide-react';
 import { companyInfo } from '../data/companyData';
 import CustomSelect from './CustomSelect';
+import { submitInquiry } from '../utils/inquiryService';
 
 export default function InquiryModal({ initialData, onClose, onTriggerServerError }) {
   const [formData, setFormData] = useState({
@@ -49,33 +50,14 @@ export default function InquiryModal({ initialData, onClose, onTriggerServerErro
     setError('');
 
     try {
-      const response = await fetch('/api/inquiries', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData)
-      });
-
-      if (response.status >= 500) {
-        if (onTriggerServerError) {
-          onClose();
-          onTriggerServerError({
-            code: `${response.status}`,
-            title: 'Server Error (500)',
-            message: 'Inquiry submit karte waqt server error aya. Kripya diagnostics check karein.',
-            details: { endpoint: '/api/inquiries', status: response.status, statusText: response.statusText }
-          });
-          return;
-        }
-      }
-
-      const data = await response.json();
-      if (data.success) {
+      const res = await submitInquiry(formData);
+      if (res.success) {
         setSubmitted(true);
       } else {
-        setError(data.error || 'Failed to submit inquiry. Please try again.');
+        setError('Failed to submit inquiry. Please try again.');
       }
     } catch (err) {
-      console.warn('Network API submission fallback:', err);
+      console.warn('Inquiry submission fallback:', err);
       setSubmitted(true);
     } finally {
       setLoading(false);
