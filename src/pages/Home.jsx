@@ -118,11 +118,11 @@ export default function Home({ setActivePage, onQuickView, onInquire }) {
 
                 {/* Official Brand Logo */}
                 <div className="showcase-crest-wrap" style={{ width: 'auto', height: 'auto', marginBottom: '1.25rem' }}>
-                  <div className="brand-landscape-badge" style={{ padding: '6px 18px', height: '54px', borderRadius: '12px', background: '#ffffff', boxShadow: '0 8px 24px rgba(0, 0, 0, 0.4), 0 0 16px rgba(56, 189, 248, 0.3)' }}>
+                  <div className="brand-landscape-badge" style={{ height: '52px', width: '120px', borderRadius: '12px', background: '#ffffff', boxShadow: '0 8px 24px rgba(0, 0, 0, 0.4), 0 0 16px rgba(56, 189, 248, 0.3)' }}>
                     <img
                       src="/assets/brand/aquahevan-logo.png"
                       alt="Aquahevan Enterprise Official Logo"
-                      style={{ height: '42px', width: 'auto', objectFit: 'contain', display: 'block' }}
+                      className="brand-official-logo"
                     />
                   </div>
                 </div>
@@ -211,8 +211,8 @@ export default function Home({ setActivePage, onQuickView, onInquire }) {
                 <div className="brand-card-header">
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '0.75rem', marginBottom: '0.5rem' }}>
                     <span className="badge-aqua">Brand Spotlight #1</span>
-                    <div className="brand-landscape-badge" style={{ height: '38px', padding: '2px 10px', background: '#ffffff' }}>
-                      <img src="/assets/brand/aquahevan-logo.png" alt="Aquahevan Official Logo" style={{ height: '30px', width: 'auto' }} />
+                    <div className="brand-landscape-badge" style={{ height: '38px', width: '90px', background: '#ffffff' }}>
+                      <img src="/assets/brand/aquahevan-logo.png" alt="Aquahevan Official Logo" className="brand-official-logo" />
                     </div>
                   </div>
                   <h3 className="brand-card-title" style={{ color: '#72b3d8' }}>Aquahevan</h3>

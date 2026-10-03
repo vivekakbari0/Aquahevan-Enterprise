@@ -15,11 +15,11 @@ export default function Footer({ setActivePage, onOpenAdmin }) {
           {/* Column 1: Brand Info */}
           <div>
             <div className="brand-logo" onClick={() => handleNavClick('home')} style={{ marginBottom: '1.25rem' }} title="Aquahevan Enterprise Jamnagar">
-              <div className="brand-landscape-badge" style={{ height: '46px', padding: '4px 12px' }}>
+              <div className="brand-landscape-badge" style={{ height: '44px', width: '100px' }}>
                 <img
                   src="/assets/brand/aquahevan-logo.png"
                   alt="Aquahevan Enterprise"
-                  style={{ height: '36px', width: 'auto', objectFit: 'contain' }}
+                  className="brand-official-logo"
                 />
               </div>
               <div>

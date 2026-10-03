@@ -127,15 +127,20 @@
   }
 
   .brand-landscape-badge {
-    height: 32px;
-    padding: 2px 6px;
-    border-radius: 5px;
+    height: 34px;
+    width: 82px;
+    padding: 0;
+    border-radius: 6px;
     flex-shrink: 0;
+    overflow: hidden;
   }
 
   .brand-official-logo {
-    height: 24px;
-    max-width: 80px;
+    height: 100%;
+    width: 100%;
+    max-width: none;
+    transform: scale(1.85);
+    transform-origin: center center;
   }
 
   .brand-name {
