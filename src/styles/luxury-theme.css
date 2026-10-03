@@ -888,6 +888,24 @@
   margin-bottom: 1.5rem;
 }
 
+.form-grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.form-actions-row {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.inquiry-modal-content {
+  max-width: 580px;
+}
+
 .form-label {
   display: block;
   font-size: 0.85rem;

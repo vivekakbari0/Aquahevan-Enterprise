@@ -268,7 +268,7 @@ export default function Contact({ onTriggerServerError }) {
                   )}
 
                   <form onSubmit={handleSubmit}>
-                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', marginBottom: '1rem' }}>
+                    <div className="form-grid-2">
                       <div>
                         <label className="form-label">Full Name *</label>
                         <input
@@ -295,7 +295,7 @@ export default function Contact({ onTriggerServerError }) {
                       </div>
                     </div>
 
-                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', marginBottom: '1rem' }}>
+                    <div className="form-grid-2">
                       <div>
                         <label className="form-label">Email Address</label>
                         <input
@@ -320,7 +320,7 @@ export default function Contact({ onTriggerServerError }) {
                       </div>
                     </div>
 
-                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', marginBottom: '1rem' }}>
+                    <div className="form-grid-2">
                       <CustomSelect
                         label="Interested Brand"
                         name="brand"
@@ -358,7 +358,7 @@ export default function Contact({ onTriggerServerError }) {
                       />
                     </div>
 
-                    <div style={{ display: 'flex', gap: '1rem', marginTop: '1.5rem', flexWrap: 'wrap' }}>
+                    <div className="form-actions-row">
                       <button
                         type="submit"
                         disabled={loading}

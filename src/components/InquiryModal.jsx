@@ -91,7 +91,7 @@ export default function InquiryModal({ initialData, onClose, onTriggerServerErro
 
   return (
     <div className="modal-overlay" onClick={onClose}>
-      <div className="modal-content" onClick={(e) => e.stopPropagation()} style={{ maxWidth: '580px', padding: '2.5rem' }}>
+      <div className="modal-content inquiry-modal-content" onClick={(e) => e.stopPropagation()}>
         <button className="modal-close-btn" onClick={onClose} aria-label="Close">
           <X size={18} />
         </button>
@@ -108,7 +108,7 @@ export default function InquiryModal({ initialData, onClose, onTriggerServerErro
               Thank you for reaching out to <strong>Aquahevan Enterprise</strong>. Vivek Akbari and our Jamnagar factory desk have received your requirements.
             </p>
 
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+            <div className="form-actions-row" style={{ flexDirection: 'column' }}>
               <button
                 type="button"
                 className="btn-whatsapp"
@@ -148,7 +148,7 @@ export default function InquiryModal({ initialData, onClose, onTriggerServerErro
             )}
 
             <form onSubmit={handleSubmit}>
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', marginBottom: '1rem' }}>
+              <div className="form-grid-2">
                 <div>
                   <label className="form-label">Full Name *</label>
                   <input
@@ -175,7 +175,7 @@ export default function InquiryModal({ initialData, onClose, onTriggerServerErro
                 </div>
               </div>
 
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', marginBottom: '1rem' }}>
+              <div className="form-grid-2">
                 <div>
                   <label className="form-label">Email Address</label>
                   <input
@@ -224,7 +224,7 @@ export default function InquiryModal({ initialData, onClose, onTriggerServerErro
                 />
               </div>
 
-              <div style={{ display: 'flex', gap: '1rem', marginTop: '1.5rem', flexWrap: 'wrap' }}>
+              <div className="form-actions-row">
                 <button
                   type="submit"
                   disabled={loading}
