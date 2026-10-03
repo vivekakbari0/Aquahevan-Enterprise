@@ -1,0 +1,467 @@
+:root {
+  /* Ultra-Luxury Minimal Palette: Obsidian Slate & Brushed Champagne Silk */
+  --bg-dark: #0a0c10;
+  --bg-card: rgba(16, 20, 28, 0.65);
+  --bg-card-hover: rgba(24, 30, 42, 0.85);
+  --bg-elevated: #131722;
+  --bg-surface: #1a202d;
+  --bg-cream: #fbf9f6;
+  
+  /* Champagne Silk / Warm Titanium Accents (Minimal Classy Luxury - No loud bright gold) */
+  --accent-champagne: #ded3c4;
+  --accent-champagne-light: #f6f1ea;
+  --accent-champagne-dark: #b5a28c;
+  --accent-champagne-glow: rgba(222, 211, 196, 0.22);
+  --accent-gradient: linear-gradient(135deg, #fdfbf7 0%, #ded3c4 45%, #a9967f 100%);
+  --accent-gradient-soft: linear-gradient(135deg, rgba(222, 211, 196, 0.12) 0%, rgba(222, 211, 196, 0.02) 100%);
+  --accent-border: rgba(222, 211, 196, 0.25);
+  --accent-border-strong: rgba(222, 211, 196, 0.55);
+
+  /* Legacy variable aliases for seamless compatibility */
+  --gold-light: var(--accent-champagne-light);
+  --gold-primary: var(--accent-champagne);
+  --gold-rich: var(--accent-champagne-dark);
+  --gold-dark: #8a7660;
+  --gold-glow: var(--accent-champagne-glow);
+  --gold-gradient: var(--accent-gradient);
+  --gold-gradient-soft: var(--accent-gradient-soft);
+  --border-gold: var(--accent-border);
+  --border-gold-strong: var(--accent-border-strong);
+  
+  /* Aqua Blue Metallic (Aquahevan Bath & Hydro Accent) */
+  --aqua-primary: #72b3d8;
+  --aqua-glow: rgba(114, 179, 216, 0.25);
+  --aqua-gradient: linear-gradient(135deg, #9cd1ee 0%, #4692bd 100%);
+
+  /* Typography & Neutral Colors */
+  --text-primary: #f8fafc;
+  --text-secondary: #cbd5e1;
+  --text-muted: #94a3b8;
+  --text-dark: #0f172a;
+  
+  /* Borders & Shadows */
+  --border-dark: rgba(255, 255, 255, 0.08);
+  --shadow-luxury: 0 20px 45px -15px rgba(0, 0, 0, 0.8), 0 0 25px -5px rgba(222, 211, 196, 0.12);
+  --shadow-card: 0 10px 30px rgba(0, 0, 0, 0.55);
+
+  /* Fonts */
+  --font-serif: 'Cinzel', 'Cormorant Garamond', Georgia, serif;
+  --font-editorial: 'Cormorant Garamond', serif;
+  --font-sans: 'Outfit', 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+
+  /* Layout & Standard Rounded Corners */
+  --container-max: 1280px;
+  --nav-height: 80px;
+  --radius-xs: 4px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
+  --radius-full: 9999px;
+  
+  /* Smooth High-Performance Transitions */
+  --transition-fast: 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-smooth: 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Reset & Base Setup */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+button {
+  background: transparent;
+  border: none;
+  font-family: inherit;
+  cursor: pointer;
+  color: inherit;
+  outline: none;
+}
+
+html {
+  scroll-behavior: smooth;
+  color-scheme: dark;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--bg-dark);
+  color: var(--text-primary);
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-image: 
+    radial-gradient(circle at 15% 15%, rgba(222, 211, 196, 0.035) 0%, transparent 40%),
+    radial-gradient(circle at 85% 80%, rgba(114, 179, 216, 0.025) 0%, transparent 40%);
+  background-attachment: fixed;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-dark);
+}
+::-webkit-scrollbar-thumb {
+  background: #242936;
+  border-radius: 4px;
+  border: 1px solid var(--accent-border);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-champagne-dark);
+}
+
+/* Typography Presets */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-serif);
+  color: var(--text-primary);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+p {
+  color: var(--text-secondary);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+/* Common Layout Utilities */
+.main-content {
+  padding-top: var(--nav-height);
+  min-height: calc(100vh - var(--nav-height));
+  display: flex;
+  flex-direction: column;
+}
+
+.page-wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+.section-spacing {
+  padding-top: 5.5rem;
+  padding-bottom: 5.5rem;
+}
+
+/* Luxury Champagne Gradient Text */
+.text-gold-gradient {
+  background: var(--accent-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+}
+
+.text-gold {
+  color: var(--accent-champagne);
+}
+
+.gold-divider {
+  height: 2px;
+  width: 70px;
+  background: var(--accent-gradient);
+  margin: 1.25rem 0;
+  border-radius: 2px;
+}
+
+.gold-divider-center {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Minimal Luxury Badges */
+.badge-gold {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.4rem 0.95rem;
+  background: rgba(222, 211, 196, 0.08);
+  border: 1px solid var(--accent-border);
+  border-radius: 24px;
+  color: var(--accent-champagne-light);
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.badge-aqua {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.4rem 0.95rem;
+  background: rgba(114, 179, 216, 0.08);
+  border: 1px solid rgba(114, 179, 216, 0.35);
+  border-radius: 24px;
+  color: var(--aqua-primary);
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+/* ===================================================
+   BUTTON PRESETS - MINIMAL CLASSY LUXURY (ROUNDED 8px)
+=================================================== */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.65rem;
+  padding: 0.85rem 1.85rem;
+  border-radius: var(--radius-sm);
+  background: rgba(222, 211, 196, 0.12);
+  color: var(--accent-champagne-light);
+  border: 1.5px solid var(--accent-champagne);
+  font-weight: 600;
+  font-size: 0.92rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 0 20px rgba(222, 211, 196, 0.15), inset 0 0 15px rgba(222, 211, 196, 0.04);
+  transition: all var(--transition-smooth);
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  z-index: 10;
+  pointer-events: auto;
+}
+
+.btn-primary::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s ease;
+  pointer-events: none;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  background: rgba(222, 211, 196, 0.22);
+  border-color: #ffffff;
+  color: #ffffff;
+  box-shadow: 0 8px 25px rgba(222, 211, 196, 0.35);
+}
+
+.btn-primary:hover::before {
+  left: 100%;
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.65rem;
+  padding: 0.85rem 1.85rem;
+  border-radius: var(--radius-sm);
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--text-primary);
+  border: 1.5px solid var(--accent-border);
+  font-weight: 500;
+  font-size: 0.92rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: all var(--transition-smooth);
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  z-index: 10;
+  pointer-events: auto;
+}
+
+.btn-secondary::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.12), transparent);
+  transition: left 0.5s ease;
+  pointer-events: none;
+}
+
+.btn-secondary:hover {
+  background: rgba(222, 211, 196, 0.12);
+  border-color: var(--accent-champagne);
+  color: var(--accent-champagne-light);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(222, 211, 196, 0.2);
+}
+
+.btn-secondary:hover::before {
+  left: 100%;
+}
+
+.btn-secondary:active {
+  transform: translateY(0);
+}
+
+.btn-whatsapp {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.65rem;
+  padding: 0.85rem 1.85rem;
+  border-radius: var(--radius-sm);
+  background: rgba(37, 211, 102, 0.14);
+  color: #4ade80;
+  border: 1.5px solid #25D366;
+  font-weight: 600;
+  font-size: 0.92rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 0 20px rgba(37, 211, 102, 0.2);
+  transition: all var(--transition-smooth);
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  z-index: 10;
+  pointer-events: auto;
+}
+
+.btn-whatsapp::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s ease;
+  pointer-events: none;
+}
+
+.btn-whatsapp:hover {
+  background: rgba(37, 211, 102, 0.24);
+  border-color: #86efac;
+  color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4);
+}
+
+.btn-whatsapp:hover::before {
+  left: 100%;
+}
+
+/* Glassmorphism Card Preset */
+.glass-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-dark);
+  border-radius: var(--radius-md);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  transition: all var(--transition-smooth);
+  position: relative;
+  overflow: hidden;
+}
+
+.glass-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--accent-border), transparent);
+  opacity: 0.6;
+  transition: opacity var(--transition-smooth);
+}
+
+.glass-card:hover {
+  border-color: var(--accent-border-strong);
+  background: var(--bg-card-hover);
+  box-shadow: var(--shadow-luxury);
+  transform: translateY(-4px);
+}
+
+.glass-card:hover::before {
+  opacity: 1;
+}
+
+/* Light Champagne Shimmer */
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.shimmer-text {
+  background: linear-gradient(90deg, #ded3c4 0%, #ffffff 50%, #ded3c4 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shimmer 6s infinite linear;
+}
+
+/* Subtle Pulse Glow */
+/* Floating WhatsApp Action Button */
+.whatsapp-float-btn {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: rgba(37, 211, 102, 0.18);
+  color: #4ade80;
+  border: 1.5px solid #25D366;
+  padding: 0.75rem 1.35rem;
+  border-radius: 30px;
+  font-weight: 600;
+  font-size: 0.88rem;
+  letter-spacing: 0.03em;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5), 0 0 20px rgba(37, 211, 102, 0.3);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  z-index: 990;
+  transition: all var(--transition-smooth);
+}
+
+.whatsapp-float-btn:hover {
+  background: rgba(37, 211, 102, 0.3);
+  border-color: #86efac;
+  color: #ffffff;
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6), 0 0 25px rgba(37, 211, 102, 0.5);
+}
+
+@media (max-width: 768px) {
+  .whatsapp-float-btn {
+    bottom: 1.25rem;
+    right: 1.25rem;
+    padding: 0.65rem 1.1rem;
+    font-size: 0.82rem;
+  }
+}
+
