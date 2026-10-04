@@ -72,7 +72,6 @@ export default function App() {
       <Navbar
         activePage={activePage}
         setActivePage={handlePageChange}
-        onOpenAdmin={() => setAdminOpen(true)}
         onOpenInquiry={handleOpenInquiry}
       />
 
@@ -124,7 +123,6 @@ export default function App() {
       {activePage !== 'error' && activePage !== '500' && !serverError && (
         <Footer
           setActivePage={handlePageChange}
-          onOpenAdmin={() => setAdminOpen(true)}
         />
       )}
 

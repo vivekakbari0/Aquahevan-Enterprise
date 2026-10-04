@@ -1,8 +1,8 @@
 import React from 'react';
-import { Phone, Mail, MapPin, MessageSquare, ShieldCheck, Lock } from 'lucide-react';
+import { Phone, Mail, MapPin, MessageSquare, ShieldCheck } from 'lucide-react';
 import { companyInfo } from '../data/companyData';
 
-export default function Footer({ setActivePage, onOpenAdmin }) {
+export default function Footer({ setActivePage }) {
   const handleNavClick = (pageId) => {
     setActivePage(pageId);
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -132,16 +132,6 @@ export default function Footer({ setActivePage, onOpenAdmin }) {
           </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem', flexWrap: 'wrap' }}>
             <span style={{ color: '#64748b' }}>Direct Manufacturer Showcase • Jamnagar, Gujarat</span>
-
-            <button
-              type="button"
-              onClick={onOpenAdmin}
-              style={{ display: 'inline-flex', alignItems: 'center', gap: '0.35rem', background: 'transparent', border: 'none', color: '#475569', fontSize: '0.78rem', cursor: 'pointer' }}
-              title="Factory Admin Inquiries Access"
-            >
-              <Lock size={12} />
-              <span>Admin Portal</span>
-            </button>
           </div>
         </div>
       </div>

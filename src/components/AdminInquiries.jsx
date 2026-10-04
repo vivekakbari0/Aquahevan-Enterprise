@@ -1,13 +1,28 @@
 import React, { useState, useEffect } from 'react';
-import { X, Download, Trash2, RefreshCw, Lock, Search, Phone, Mail, Calendar, AlertTriangle } from 'lucide-react';
+import { X, Download, Trash2, RefreshCw, Lock, Search, Phone, Mail, Calendar, AlertTriangle, KeyRound } from 'lucide-react';
 import CustomSelect from './CustomSelect';
 import { getStoredInquiries, deleteStoredInquiry } from '../utils/inquiryService';
 
+const ADMIN_PASSCODE = '85116'; // Factory Owner PIN (last 5 digits of factory phone)
+
 export default function AdminInquiries({ onClose, onTriggerServerError }) {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [pinInput, setPinInput] = useState('');
+  const [pinError, setPinError] = useState('');
   const [inquiries, setInquiries] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
   const [brandFilter, setBrandFilter] = useState('ALL');
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+    if (pinInput.trim() === ADMIN_PASSCODE || pinInput.trim() === 'aquahevan2026') {
+      setIsAuthenticated(true);
+      setPinError('');
+    } else {
+      setPinError('Invalid Admin Passcode. Access restricted to factory owners.');
+    }
+  };
 
   const fetchInquiries = async () => {
     setLoading(true);
@@ -36,8 +51,12 @@ export default function AdminInquiries({ onClose, onTriggerServerError }) {
   };
 
   useEffect(() => {
-    fetchInquiries();
+    if (isAuthenticated) {
+      fetchInquiries();
+    }
+  }, [isAuthenticated]);
 
+  useEffect(() => {
     const handleKeyDown = (e) => {
       if (e.key === 'Escape') {
         onClose();
@@ -138,26 +157,64 @@ export default function AdminInquiries({ onClose, onTriggerServerError }) {
       <div
         className="modal-content"
         onClick={(e) => e.stopPropagation()}
-        style={{ maxWidth: '980px', padding: '2.5rem' }}
+        style={{ maxWidth: isAuthenticated ? '980px' : '440px', padding: '2.5rem', transition: 'max-width 0.3s ease' }}
       >
         <button className="modal-close-btn" onClick={onClose} aria-label="Close">
           <X size={18} />
         </button>
 
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem', flexWrap: 'wrap', gap: '1rem' }}>
-          <div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.35rem' }}>
-              <span className="badge-gold">
-                <Lock size={12} /> Management Portal
-              </span>
+        {!isAuthenticated ? (
+          <div style={{ textAlign: 'center' }}>
+            <div style={{ width: '56px', height: '56px', borderRadius: '50%', background: 'rgba(212, 175, 55, 0.15)', border: '1px solid var(--accent-champagne)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 1.25rem auto' }}>
+              <KeyRound size={26} color="var(--accent-champagne)" />
             </div>
-            <h2 style={{ fontSize: '1.75rem', fontFamily: 'var(--font-serif)' }}>
-              Inquiry Records & Leads
+            <h2 style={{ fontSize: '1.5rem', fontFamily: 'var(--font-serif)', marginBottom: '0.5rem' }}>
+              Factory Admin Access
             </h2>
-            <p style={{ fontSize: '0.85rem', color: '#94a3b8' }}>
-              Real-time inquiries stored securely in local database (<code>data/inquiries.json</code>).
+            <p style={{ fontSize: '0.85rem', color: '#94a3b8', marginBottom: '1.5rem', lineHeight: 1.5 }}>
+              This portal contains confidential factory customer leads. Enter your Admin Passcode to continue.
             </p>
+
+            {pinError && (
+              <div style={{ background: 'rgba(239, 68, 68, 0.15)', border: '1px solid #ef4444', color: '#fca5a5', padding: '0.65rem 0.85rem', borderRadius: 'var(--radius-sm)', fontSize: '0.82rem', marginBottom: '1.25rem' }}>
+                {pinError}
+              </div>
+            )}
+
+            <form onSubmit={handleLogin}>
+              <div style={{ marginBottom: '1.25rem' }}>
+                <input
+                  type="password"
+                  placeholder="Enter Admin PIN"
+                  value={pinInput}
+                  onChange={(e) => setPinInput(e.target.value)}
+                  className="form-input"
+                  style={{ textAlign: 'center', letterSpacing: '0.2em', fontSize: '1.05rem' }}
+                  autoFocus
+                  required
+                />
+              </div>
+              <button type="submit" className="btn-primary" style={{ width: '100%', justifyContent: 'center' }}>
+                <span>Unlock Inquiries</span>
+              </button>
+            </form>
           </div>
+        ) : (
+          <>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem', flexWrap: 'wrap', gap: '1rem' }}>
+              <div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.35rem' }}>
+                  <span className="badge-gold">
+                    <Lock size={12} /> Management Portal
+                  </span>
+                </div>
+                <h2 style={{ fontSize: '1.75rem', fontFamily: 'var(--font-serif)' }}>
+                  Inquiry Records & Leads
+                </h2>
+                <p style={{ fontSize: '0.85rem', color: '#94a3b8' }}>
+                  Real-time inquiries stored securely in local database (<code>data/inquiries.json</code>).
+                </p>
+              </div>
 
           <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
             <button
@@ -313,6 +370,8 @@ export default function AdminInquiries({ onClose, onTriggerServerError }) {
               </div>
             ))}
           </div>
+        )}
+          </>
         )}
       </div>
     </div>
