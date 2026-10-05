@@ -137,22 +137,6 @@ export const productsData = [
     featured: false
   },
   {
-    id: "aq-shower-08",
-    brand: "Aquahevan",
-    brandId: "aquahevan",
-    category: "Overhead Shower",
-    name: "AquaCirque Modern Stepped-Bezel Round Rain Shower",
-    tagline: "Contemporary stepped-rim round overhead shower with white spray face",
-    description: "Sculpted round overhead shower featuring a multi-tier stepped chrome bezel and matte white nozzle disk. Delivers a dense, gentle rainfall canopy across the entire body.",
-    material: "High-Durability Composite & Brass Ball Joint",
-    finishes: ["Chrome / White", "Full Chrome"],
-    sizes: ["6-Inch Round", "8-Inch Round"],
-    applications: ["Hotel Suites", "Designer Residential Showers"],
-    features: ["Stepped chrome bezel design", "Dense uniform droplet matrix", "Anti-limescale silicone tips"],
-    image: "/assets/products/IMG-20250122-WA0143.jpg",
-    featured: false
-  },
-  {
     id: "aq-shower-09",
     brand: "Aquahevan",
     brandId: "aquahevan",
