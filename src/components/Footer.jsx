@@ -2,6 +2,24 @@ import React from 'react';
 import { Phone, Mail, MapPin, MessageSquare, ShieldCheck } from 'lucide-react';
 import { companyInfo } from '../data/companyData';
 
+const InstagramIcon = ({ size = 16, ...props }) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    {...props}
+  >
+    <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
+    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+    <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
+  </svg>
+);
+
 export default function Footer({ setActivePage }) {
   const handleNavClick = (pageId) => {
     setActivePage(pageId);
@@ -116,10 +134,21 @@ export default function Footer({ setActivePage }) {
                 href={companyInfo.whatsappUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                style={{ width: '36px', height: '36px', borderRadius: '8px', background: 'rgba(255, 255, 255, 0.04)', border: '1px solid var(--border-dark)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#4ade80' }}
+                className="footer-social-icon whatsapp"
                 title="WhatsApp Direct Chat"
+                aria-label="WhatsApp Direct Chat"
               >
                 <MessageSquare size={16} />
+              </a>
+              <a
+                href={companyInfo.instagram}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="footer-social-icon instagram"
+                title="Follow Aquahevan Enterprise on Instagram"
+                aria-label="Instagram Profile"
+              >
+                <InstagramIcon size={16} />
               </a>
             </div>
           </div>

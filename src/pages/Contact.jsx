@@ -12,6 +12,24 @@ import { companyInfo } from '../data/companyData';
 import CustomSelect from '../components/CustomSelect';
 import { submitInquiry } from '../utils/inquiryService';
 
+const InstagramIcon = ({ size = 18, ...props }) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    {...props}
+  >
+    <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
+    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+    <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
+  </svg>
+);
+
 export default function Contact({ onTriggerServerError }) {
   const [formData, setFormData] = useState({
     name: '',
@@ -165,8 +183,8 @@ export default function Contact({ onTriggerServerError }) {
                 </div>
               </div>
 
-              {/* Direct WhatsApp Action Button */}
-              <div style={{ marginTop: '2rem', paddingTop: '1.5rem', borderTop: '1px solid var(--border-dark)' }}>
+              {/* Direct WhatsApp & Instagram Action Buttons */}
+              <div style={{ marginTop: '2rem', paddingTop: '1.5rem', borderTop: '1px solid var(--border-dark)', display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
                 <a
                   href={companyInfo.whatsappUrl}
                   target="_blank"
@@ -176,6 +194,16 @@ export default function Contact({ onTriggerServerError }) {
                 >
                   <MessageSquare size={18} />
                   <span>Start WhatsApp Chat Now</span>
+                </a>
+                <a
+                  href={companyInfo.instagram}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-instagram"
+                  style={{ width: '100%', justifyContent: 'center' }}
+                >
+                  <InstagramIcon size={18} />
+                  <span>Follow on Instagram (@aquahevanenterprise)</span>
                 </a>
               </div>
             </div>

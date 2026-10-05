@@ -10,6 +10,8 @@ export const companyInfo = {
   phoneDisplay: "+91 85116 57132",
   whatsapp: "918511657132",
   whatsappUrl: "https://wa.me/918511657132?text=Hello%20Aquahevan%20Enterprise,%20I%20am%20interested%20in%20your%20products.",
+  instagram: "https://www.instagram.com/aquahevanenterprise?stkn=NDlvbTB2eG42Z2Q1",
+  instagramHandle: "@aquahevanenterprise",
   email: "aquahevanenterprise@gmail.com",
   businessType: "Manufacturer & Direct Factory Supplier",
   manufacturingHub: "Jamnagar — The Brass City of India",
